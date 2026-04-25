@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RevORz — Mendefinisikan ulang waktu dengan teknologi premium. Smartwatch mewah dengan desain yang elegan dan fitur canggih.">
+    <meta name="keywords" content="RevORz, smartwatch, jam tangan pintar, wearable, premium, mewah">
+    <meta name="author" content="RevORz">
+    <title>RevORz — Mendefinisikan Ulang Waktu</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'revorz': {
+                            50:  '#e8f4fd',
+                            100: '#d1e9fb',
+                            200: '#a3d3f7',
+                            300: '#75bdf3',
+                            400: '#47a7ef',
+                            500: '#3b9be5',
+                            600: '#2f8ad4',
+                            700: '#1e6db0',
+                            800: '#15508a',
+                            900: '#0c3460',
+                        },
+                        'dark': {
+                            950: '#050505',
+                            900: '#0a0a0a',
+                            800: '#111111',
+                            700: '#1a1a1a',
+                            600: '#262626',
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'fade-in-up-delay-1': 'fadeInUp 1s ease-out 0.2s forwards',
+                        'fade-in-up-delay-2': 'fadeInUp 1s ease-out 0.4s forwards',
+                        'fade-in-up-delay-3': 'fadeInUp 1s ease-out 0.6s forwards',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(-2deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(59, 155, 229, 0.15)' },
+                            '50%': { boxShadow: '0 0 40px rgba(59, 155, 229, 0.35)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        },
+                    },
+                    letterSpacing: {
+                        'ultra-wide': '0.25em',
+                        'mega-wide': '0.35em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== BASE RESETS ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 155, 229, 0.3);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 155, 229, 0.5);
+        }
+
+        /* ===== NAVBAR GLASSMORPHISM ===== */
+        .navbar-scrolled {
+            background: rgba(10, 10, 10, 0.75) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(59, 155, 229, 0.08);
+        }
+
+        /* ===== HERO VIDEO OVERLAY ===== */
+        .hero-overlay {
+            background: linear-gradient(
+                180deg,
+                rgba(5, 5, 5, 0.3) 0%,
+                rgba(5, 5, 5, 0.5) 40%,
+                rgba(5, 5, 5, 0.85) 80%,
+                rgba(5, 5, 5, 1) 100%
+            );
+        }
+
+        /* ===== HERO TEXT ANIMATIONS ===== */
+        .hero-content > * {
+            opacity: 0;
+        }
+
+        /* ===== PRODUCT FLOATING SHADOW ===== */
+        .product-shadow {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(59, 155, 229, 0.15) 0%, transparent 70%);
+            filter: blur(10px);
+            animation: shadowPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes shadowPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
+        }
+
+        /* ===== SCROLL REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== BUTTON HOVER SHINE ===== */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.12),
+                transparent
+            );
+            transform: skewX(-25deg);
+            transition: left 0.6s ease;
+        }
+        .btn-shine:hover::after {
+            left: 120%;
+        }
+
+        /* ===== FEATURE CARDS ===== */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.6) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(59, 155, 229, 0.06);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .feature-card:hover {
+            border-color: rgba(59, 155, 229, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(59, 155, 229, 0.05);
+        }
+
+        /* ===== DIVIDER LINE ===== */
+        .accent-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3b9be5, transparent);
+        }
+
+        /* ===== SPECS GRID LINE ===== */
+        .spec-divider {
+            background: linear-gradient(90deg, transparent, rgba(59, 155, 229, 0.15), transparent);
+            height: 1px;
+        }
+
+        /* ===== REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal, .reveal-left, .reveal-right {
+                opacity: 1;
+                transform: none;
+            }
+            .hero-content > * {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display">
+
+    <!-- ============================= -->
+    <!--           NAVBAR              -->
+    <!-- ============================= -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- Logo -->
+                <a href="#home" id="nav-logo" class="flex items-center gap-3 group cursor-pointer">
+                    <img src="./asset/logo-asset.png" alt="RevORz Logo" class="h-9 md:h-10 w-auto transition-transform duration-300 group-hover:scale-105">
+                </a>
+
+                <!-- Navigation Links (Desktop) -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#home" id="nav-home" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 cursor-pointer">Home</a>
+                    <a href="#fitur" id="nav-fitur" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 cursor-pointer">Fitur</a>
+                    <a href="#produk" id="nav-produk" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 cursor-pointer">Produk</a>
+                    <a href="#beli" id="nav-beli" class="btn-shine ml-4 px-7 py-2.5 bg-revorz-500 hover:bg-revorz-600 text-white text-sm font-medium tracking-wider uppercase rounded-full transition-all duration-300 cursor-pointer">
+                        Beli Sekarang
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Toggle Menu">
+                    <span class="block w-6 h-0.5 bg-neutral-300 transition-all duration-300" id="menu-line-1"></span>
+                    <span class="block w-6 h-0.5 bg-neutral-300 transition-all duration-300" id="menu-line-2"></span>
+                    <span class="block w-4 h-0.5 bg-neutral-300 transition-all duration-300 ml-auto" id="menu-line-3"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+            <div class="px-6 pb-6 pt-2 flex flex-col gap-4 border-t border-neutral-800/50">
+                <a href="#home" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 py-2 cursor-pointer">Home</a>
+                <a href="#fitur" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 py-2 cursor-pointer">Fitur</a>
+                <a href="#produk" class="text-sm tracking-widest uppercase text-neutral-400 hover:text-white transition-colors duration-300 py-2 cursor-pointer">Produk</a>
+                <a href="#beli" class="btn-shine text-center px-7 py-3 bg-revorz-500 text-white text-sm font-medium tracking-wider uppercase rounded-full cursor-pointer">Beli Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ============================= -->
+        <!--        HERO SECTION           -->
+        <!-- ============================= -->
+        <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+
+            <!-- Background Video -->
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover scale-105"
+                   poster="./asset/produk(jam-tanga)-asset-image.png">
+                <source src="./asset/Video_Looping_Sinematik-asset.mp4" type="video/mp4">
+            </video>
+
+            <!-- Gradient Overlay -->
+            <div class="hero-overlay absolute inset-0 z-10"></div>
+
+            <!-- Subtle radial glow -->
+            <div class="absolute inset-0 z-10 opacity-30"
+                 style="background: radial-gradient(ellipse at 50% 60%, rgba(59, 155, 229, 0.08) 0%, transparent 60%);">
+            </div>
+
+            <!-- Content -->
+            <div class="hero-content relative z-20 text-center px-6 max-w-4xl mx-auto">
+                <p class="text-revorz-400 text-xs md:text-sm tracking-mega-wide uppercase mb-6 font-medium animate-fade-in-up">
+                    Teknologi Premium di Pergelangan Anda
+                </p>
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.05] tracking-tight mb-8 animate-fade-in-up-delay-1">
+                    Mendefinisikan<br>
+                    <span class="bg-gradient-to-r from-revorz-300 via-revorz-500 to-revorz-700 bg-clip-text text-transparent">Ulang Waktu</span>
+                </h1>
+                <p class="text-neutral-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-10 font-light animate-fade-in-up-delay-2">
+                    Setiap detik adalah pernyataan. RevORz menggabungkan presisi rekayasa dengan keindahan desain — diciptakan untuk mereka yang menuntut yang terbaik.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up-delay-3">
+                    <a href="#produk" id="hero-cta-discover" class="btn-shine px-10 py-4 bg-revorz-500 hover:bg-revorz-600 text-white text-sm font-semibold tracking-wider uppercase rounded-full transition-all duration-300 animate-pulse-glow cursor-pointer">
+                        Temukan Selengkapnya
+                    </a>
+                    <a href="#fitur" id="hero-cta-specs" class="px-10 py-4 border border-neutral-700 hover:border-revorz-500/50 text-neutral-300 hover:text-white text-sm font-medium tracking-wider uppercase rounded-full transition-all duration-300 cursor-pointer">
+                        Lihat Spesifikasi
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3 opacity-60">
+                <span class="text-[10px] tracking-ultra-wide uppercase text-neutral-500">Scroll</span>
+                <div class="w-px h-10 bg-gradient-to-b from-neutral-500 to-transparent relative overflow-hidden">
+                    <div class="w-full h-3 bg-revorz-400 absolute animate-[scrollDown_2s_ease-in-out_infinite]"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--    PRODUCT HIGHLIGHT SECTION  -->
+        <!-- ============================= -->
+        <section id="produk" class="relative py-32 md:py-40 overflow-hidden">
+
+            <!-- Ambient background glow -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-revorz-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-6 lg:px-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+                    <!-- LEFT: Product Image -->
+                    <div class="reveal-left order-2 lg:order-1 flex justify-center">
+                        <div class="relative">
+                            <img src="./asset/produk(jam-tanga)-asset-image.png"
+                                 alt="RevORz Smartwatch — Tampilan produk premium"
+                                 class="w-72 md:w-80 lg:w-96 h-auto animate-float drop-shadow-2xl relative z-10">
+
+                            <!-- Glow ring behind product -->
+                            <div class="absolute inset-0 -m-10 rounded-full border border-revorz-500/10 animate-pulse-glow"></div>
+
+                            <!-- Floating shadow -->
+                            <div class="product-shadow"></div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Description -->
+                    <div class="reveal-right order-1 lg:order-2 space-y-8">
+                        <div>
+                            <p class="text-revorz-400 text-xs tracking-mega-wide uppercase font-semibold mb-4">Highlight Produk</p>
+                            <div class="accent-line mb-6"></div>
+                            <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-6">
+                                Diciptakan untuk<br>
+                                <span class="text-revorz-400">Kesempurnaan</span>
+                            </h2>
+                            <p class="text-neutral-400 text-base md:text-lg leading-relaxed font-light max-w-lg">
+                                RevORz bukan sekadar smartwatch — ia adalah perpanjangan dari identitas Anda. Dibalut dengan material premium dan dikemas dalam desain yang tak lekang oleh waktu, setiap detail dirancang untuk memberikan pengalaman yang tak tertandingi.
+                            </p>
+                        </div>
+
+                        <!-- Specs Mini Grid -->
+                        <div class="grid grid-cols-2 gap-6 pt-4">
+                            <div class="space-y-2">
+                                <p class="text-2xl md:text-3xl font-bold text-white">7<span class="text-revorz-400 text-lg ml-1">Hari</span></p>
+                                <p class="text-xs tracking-widest uppercase text-neutral-500">Daya Tahan Baterai</p>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-2xl md:text-3xl font-bold text-white">5<span class="text-revorz-400 text-lg ml-1">ATM</span></p>
+                                <p class="text-xs tracking-widest uppercase text-neutral-500">Tahan Air</p>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-2xl md:text-3xl font-bold text-white">AMOLED</p>
+                                <p class="text-xs tracking-widest uppercase text-neutral-500">Layar Display</p>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-2xl md:text-3xl font-bold text-white">24<span class="text-revorz-400 text-lg ml-1">g</span></p>
+                                <p class="text-xs tracking-widest uppercase text-neutral-500">Ultra Ringan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--       FEATURES SECTION        -->
+        <!-- ============================= -->
+        <section id="fitur" class="relative py-32 md:py-40">
+
+            <!-- Section Header -->
+            <div class="max-w-7xl mx-auto px-6 lg:px-10 mb-20 text-center">
+                <div class="reveal">
+                    <p class="text-revorz-400 text-xs tracking-mega-wide uppercase font-semibold mb-4">Mengapa RevORz</p>
+                    <div class="accent-line mx-auto mb-6"></div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-6">
+                        Fitur Unggulan
+                    </h2>
+                    <p class="text-neutral-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                        Dirancang dengan presisi, dibangun untuk performa. Setiap fitur memberikan pengalaman yang melebihi ekspektasi Anda.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="max-w-7xl mx-auto px-6 lg:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Card 1 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Monitor Kesehatan</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            Pantau detak jantung, tingkat oksigen darah, dan kualitas tidur Anda secara real-time dengan sensor berteknologi tinggi.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.1s;">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Pengisian Cepat</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            Teknologi fast-charging magnetik — 15 menit pengisian memberikan daya untuk satu hari penuh aktivitas tanpa henti.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.2s;">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.764m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Desain Premium</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            Material kelas atas dengan finishing matte yang elegan. Tali silikon hypoallergenic untuk kenyamanan sepanjang hari.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.1s;">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Konektivitas Cerdas</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            Terhubung mulus dengan smartphone Anda. Terima notifikasi, kontrol musik, dan jawab panggilan langsung dari pergelangan tangan.
+                        </p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.2s;">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">GPS Terintegrasi</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            GPS bawaan yang akurat untuk melacak rute lari, bersepeda, dan aktivitas outdoor tanpa perlu membawa smartphone.
+                        </p>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.3s;">
+                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
+                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Keamanan Terjamin</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
+                            Dilengkapi fitur Find My Watch, kunci layar, dan enkripsi data end-to-end untuk menjaga privasi Anda tetap aman.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================= -->
+        <!--       CTA / BELI SECTION      -->
+        <!-- ============================= -->
+        <section id="beli" class="relative py-32 md:py-40 overflow-hidden">
+
+            <!-- Background accent -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-revorz-500/[0.03] to-transparent pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center relative z-10">
+                <div class="reveal">
+                    <p class="text-revorz-400 text-xs tracking-mega-wide uppercase font-semibold mb-4">Tersedia Sekarang</p>
+                    <div class="accent-line mx-auto mb-8"></div>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-6">
+                        Siap Memiliki<br>
+                        <span class="bg-gradient-to-r from-revorz-300 to-revorz-600 bg-clip-text text-transparent">RevORz?</span>
+                    </h2>
+                    <p class="text-neutral-400 text-base md:text-lg max-w-xl mx-auto font-light leading-relaxed mb-12">
+                        Jadilah bagian dari revolusi. Pesan sekarang dan rasakan perbedaan dari smartwatch yang sesungguhnya premium.
+                    </p>
+
+                    <!-- Price + CTA -->
+                    <div class="flex flex-col items-center gap-6">
+                        <div class="flex items-baseline gap-3">
+                            <span class="text-neutral-500 text-lg line-through font-light">Rp 1.299.000</span>
+                            <span class="text-3xl md:text-4xl font-bold text-white">Rp 999.000</span>
+                        </div>
+                        <a href="#" id="cta-buy-now" class="btn-shine px-14 py-4 bg-gradient-to-r from-revorz-500 to-revorz-700 hover:from-revorz-400 hover:to-revorz-600 text-white text-sm font-semibold tracking-wider uppercase rounded-full transition-all duration-300 shadow-lg shadow-revorz-500/20 hover:shadow-revorz-500/30 cursor-pointer">
+                            Pesan Sekarang
+                        </a>
+                        <p class="text-neutral-600 text-xs tracking-wide mt-2">Gratis ongkir • Garansi 1 tahun • Pengembalian 30 hari</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================= -->
+    <!--           FOOTER              -->
+    <!-- ============================= -->
+    <footer class="border-t border-neutral-800/50 py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <img src="./asset/logo-asset.png" alt="RevORz Logo" class="h-7 w-auto opacity-60">
+                </div>
+                <p class="text-neutral-600 text-xs tracking-widest uppercase">
+                    &copy; 2026 RevORz. Hak Cipta Dilindungi.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="Instagram">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="Twitter / X">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="YouTube">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================= -->
+    <!--        JAVASCRIPT             -->
+    <!-- ============================= -->
+    <script>
+        // ===== NAVBAR SCROLL EFFECT =====
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        function handleNavbarScroll() {
+            const currentScroll = window.scrollY;
+            if (currentScroll > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+            lastScroll = currentScroll;
+        }
+
+        window.addEventListener('scroll', handleNavbarScroll, { passive: true });
+
+        // ===== MOBILE MENU TOGGLE =====
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuLine1 = document.getElementById('menu-line-1');
+        const menuLine2 = document.getElementById('menu-line-2');
+        const menuLine3 = document.getElementById('menu-line-3');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+                menuLine1.style.transform = 'rotate(45deg) translate(4px, 4px)';
+                menuLine2.style.opacity = '0';
+                menuLine3.style.transform = 'rotate(-45deg) translate(4px, -4px)';
+                menuLine3.style.width = '1.5rem';
+            } else {
+                mobileMenu.style.maxHeight = '0px';
+                menuLine1.style.transform = 'none';
+                menuLine2.style.opacity = '1';
+                menuLine3.style.transform = 'none';
+                menuLine3.style.width = '1rem';
+            }
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileMenu.style.maxHeight = '0px';
+                menuLine1.style.transform = 'none';
+                menuLine2.style.opacity = '1';
+                menuLine3.style.transform = 'none';
+                menuLine3.style.width = '1rem';
+            });
+        });
+
+        // ===== INTERSECTION OBSERVER — SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    // Optional: unobserve after reveal for performance
+                    // revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -60px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = navbar.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ===== SCROLL INDICATOR ANIMATION (CSS Keyframes via JS injection) =====
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes scrollDown {
+                0% { top: -12px; opacity: 0; }
+                30% { opacity: 1; }
+                100% { top: 40px; opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    </script>
+
+</body>
+</html>
