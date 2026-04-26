@@ -222,16 +222,37 @@
 
         /* ===== FEATURE CARDS ===== */
         .feature-card {
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.4) 0%, rgba(10, 10, 10, 0.6) 100%);
-            backdrop-filter: blur(12px);
+            background: rgba(15, 15, 15, 0.6);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+        }
+        .feature-card:hover::before {
+            left: 150%;
         }
         .feature-card:hover {
-            border-color: rgba(59, 155, 229, 0.3);
-            background: linear-gradient(135deg, rgba(40, 40, 40, 0.5) 0%, rgba(15, 15, 15, 0.8) 100%);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 155, 229, 0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+            border-color: rgba(59, 155, 229, 0.4);
+            background: rgba(20, 20, 20, 0.8);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(59, 155, 229, 0.15);
+        }
+        .feature-card:hover .feature-icon-wrapper {
+            transform: scale(1.1);
+            background: rgba(59, 155, 229, 0.15);
+            box-shadow: 0 0 20px rgba(59, 155, 229, 0.3);
+        }
+        .feature-icon-wrapper {
+            transition: all 0.4s ease;
         }
 
         /* ===== DIVIDER LINE ===== */
@@ -433,7 +454,7 @@
                                 <span class="bg-gradient-to-r from-revorz-300 to-revorz-500 bg-clip-text text-transparent">Kesempurnaan</span>
                             </h2>
                             <p class="text-neutral-400 text-base md:text-lg leading-relaxed font-light max-w-lg">
-                                RevORz bukan sekadar smartwatch — ia adalah perpanjangan dari identitas Anda. Dibalut dengan material premium dan dikemas dalam desain yang tak lekang oleh waktu, setiap detail dirancang untuk memberikan pengalaman yang tak tertandingi.
+                                Revorz bukan sekadar smartwatch — ia adalah perpanjangan dari identitas Anda. Dibalut dengan material premium dan dikemas dalam desain yang tak lekang oleh waktu, setiap detail dirancang untuk memberikan pengalaman yang tak tertandingi.
                             </p>
                         </div>
 
@@ -485,85 +506,126 @@
 
             <!-- Feature Cards -->
             <div class="max-w-7xl mx-auto px-6 lg:px-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 auto-rows-[260px]">
 
-                    <!-- Card 1 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 1: Monitor Kesehatan (2x2) -->
+                    <div class="reveal row-span-2 md:col-span-2 lg:col-span-2 lg:row-span-2 feature-card rounded-3xl p-8 lg:p-10 cursor-pointer group flex flex-col relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg">
+                        <div class="absolute -right-20 -top-20 w-[150%] h-[150%] bg-gradient-to-bl from-revorz-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 group-hover:-translate-x-4 group-hover:scale-110 transition-all duration-700 ease-out text-white/[0.03] group-hover:text-revorz-500/10 pointer-events-none">
+                            <svg class="w-72 h-72" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="0.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Monitor Kesehatan</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            Pantau detak jantung, tingkat oksigen darah, dan kualitas tidur Anda secara real-time dengan sensor berteknologi tinggi.
-                        </p>
+                        
+                        <div class="relative z-10 w-16 h-16 rounded-2xl bg-gradient-to-br from-revorz-400 to-revorz-600 flex items-center justify-center mb-auto shadow-[0_0_20px_rgba(59,155,229,0.3)] group-hover:shadow-[0_0_30px_rgba(59,155,229,0.6)] transition-all duration-500">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                        </div>
+                        <div class="relative z-10 mt-12">
+                            <h3 class="text-3xl font-bold text-white mb-4 tracking-tight group-hover:text-revorz-300 transition-colors duration-300">Monitor Kesehatan Pro</h3>
+                            <p class="text-neutral-400 text-base leading-relaxed max-w-sm group-hover:text-neutral-300 transition-colors duration-300">
+                                Pantau detak jantung, SpO2, dan analisis kualitas tidur secara real-time dengan presisi kelas medis.
+                            </p>
+                        </div>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.1s;">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 2: Pengisian Cepat (1x1) -->
+                    <div class="reveal md:col-span-1 lg:col-span-1 lg:row-span-1 feature-card rounded-3xl p-8 cursor-pointer group flex flex-col relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg" style="transition-delay: 0.1s;">
+                        <div class="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-auto text-revorz-400 group-hover:text-white group-hover:bg-revorz-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,155,229,0.4)]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Pengisian Cepat</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            Teknologi fast-charging magnetik — 15 menit pengisian memberikan daya untuk satu hari penuh aktivitas tanpa henti.
-                        </p>
+                        <div class="relative z-10 mt-4">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-revorz-300 transition-colors duration-300">Fast Charging</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                15 menit pengisian untuk aktivitas satu hari penuh.
+                            </p>
+                        </div>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.2s;">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 3: Desain Premium (1x1) -->
+                    <div class="reveal md:col-span-1 lg:col-span-1 lg:row-span-1 feature-card rounded-3xl p-8 cursor-pointer group flex flex-col relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg" style="transition-delay: 0.2s;">
+                        <div class="relative z-10 w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-auto text-revorz-400 group-hover:text-white group-hover:bg-revorz-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,155,229,0.4)]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.764m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Desain Premium</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            Material kelas atas dengan finishing matte yang elegan. Tali silikon hypoallergenic untuk kenyamanan sepanjang hari.
-                        </p>
+                        <div class="relative z-10 mt-4">
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-revorz-300 transition-colors duration-300">Desain Premium</h3>
+                            <p class="text-neutral-400 text-sm leading-relaxed group-hover:text-neutral-300 transition-colors duration-300">
+                                Finishing matte elegan dengan material titanium ringan.
+                            </p>
+                        </div>
                     </div>
 
-                    <!-- Card 4 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.1s;">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 4: Konektivitas (2x1) -->
+                    <div class="reveal md:col-span-2 lg:col-span-2 lg:row-span-1 feature-card rounded-3xl p-8 cursor-pointer group flex flex-col justify-center relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg" style="transition-delay: 0.1s;">
+                        <div class="absolute -right-8 top-1/2 -translate-y-1/2 text-white/[0.02] group-hover:text-white/[0.05] group-hover:scale-110 transition-all duration-700 pointer-events-none">
+                            <svg class="w-48 h-48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Konektivitas Cerdas</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            Terhubung mulus dengan smartphone Anda. Terima notifikasi, kontrol musik, dan jawab panggilan langsung dari pergelangan tangan.
-                        </p>
+                        <div class="relative z-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center w-full">
+                            <div class="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-revorz-400 group-hover:text-white group-hover:bg-revorz-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,155,229,0.4)]">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-revorz-300 transition-colors duration-300">Konektivitas Cerdas</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-[280px] group-hover:text-neutral-300 transition-colors duration-300">
+                                    Terhubung mulus dengan smartphone Anda. Kontrol musik dan jawab panggilan.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Card 5 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.2s;">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 5: GPS (2x1) -->
+                    <div class="reveal md:col-span-2 lg:col-span-2 lg:row-span-1 feature-card rounded-3xl p-8 cursor-pointer group flex flex-col justify-center relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg" style="transition-delay: 0.2s;">
+                        <div class="absolute -right-8 top-1/2 -translate-y-1/2 text-white/[0.02] group-hover:text-white/[0.05] group-hover:scale-110 transition-all duration-700 pointer-events-none">
+                            <svg class="w-48 h-48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">GPS Terintegrasi</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            GPS bawaan yang akurat untuk melacak rute lari, bersepeda, dan aktivitas outdoor tanpa perlu membawa smartphone.
-                        </p>
+                        <div class="relative z-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center w-full">
+                            <div class="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-revorz-400 group-hover:text-white group-hover:bg-revorz-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,155,229,0.4)]">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-revorz-300 transition-colors duration-300">GPS Presisi Akurat</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-[280px] group-hover:text-neutral-300 transition-colors duration-300">
+                                    Lacak rute lari dan aktivitas outdoor secara independen tanpa smartphone.
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Card 6 -->
-                    <div class="reveal feature-card rounded-2xl p-8 cursor-pointer group" style="transition-delay: 0.3s;">
-                        <div class="w-12 h-12 rounded-xl bg-revorz-500/10 flex items-center justify-center mb-6 group-hover:bg-revorz-500/20 transition-colors duration-300">
-                            <svg class="w-6 h-6 text-revorz-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <!-- Card 6: Keamanan (2x1) -->
+                    <div class="reveal md:col-span-2 lg:col-span-2 lg:row-span-1 feature-card rounded-3xl p-8 cursor-pointer group flex flex-col justify-center relative overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-revorz-500/40 transition-all duration-500 shadow-lg" style="transition-delay: 0.3s;">
+                        <div class="absolute -right-8 top-1/2 -translate-y-1/2 text-white/[0.02] group-hover:text-white/[0.05] group-hover:scale-110 transition-all duration-700 pointer-events-none">
+                            <svg class="w-48 h-48" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-white mb-3 tracking-wide">Keamanan Terjamin</h3>
-                        <p class="text-neutral-500 text-sm leading-relaxed font-light">
-                            Dilengkapi fitur Find My Watch, kunci layar, dan enkripsi data end-to-end untuk menjaga privasi Anda tetap aman.
-                        </p>
+                        <div class="relative z-10 flex flex-col sm:flex-row gap-6 items-start sm:items-center w-full">
+                            <div class="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-revorz-400 group-hover:text-white group-hover:bg-revorz-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(59,155,229,0.4)]">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-revorz-300 transition-colors duration-300">Keamanan Terjamin</h3>
+                                <p class="text-neutral-400 text-sm leading-relaxed max-w-[280px] group-hover:text-neutral-300 transition-colors duration-300">
+                                    Fitur Find My Watch dan enkripsi data end-to-end menjaga privasi Anda.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -614,30 +676,156 @@
     <!-- ============================= -->
     <!--           FOOTER              -->
     <!-- ============================= -->
-    <footer class="border-t border-neutral-800/50 py-12">
-        <div class="max-w-7xl mx-auto px-6 lg:px-10">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
-                    <img src="./asset/logo-asset.png" alt="RevORz Logo" class="h-7 w-auto opacity-60">
+    <footer class="relative bg-[#030303] pt-32 pb-8 overflow-hidden border-t border-white/5">
+        <!-- Background Decor -->
+        <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] opacity-20 pointer-events-none" style="mask-image: linear-gradient(to bottom, transparent, black, transparent);"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-revorz-500/50 to-transparent"></div>
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-revorz-500/20 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+            
+            <!-- Newsletter CTA Section -->
+            <div class="flex flex-col md:flex-row items-center justify-between bg-white/[0.02] border border-white/10 rounded-[2rem] p-10 md:p-14 mb-24 backdrop-blur-md shadow-[0_30px_60px_rgba(0,0,0,0.5)]">
+                <div class="flex-1 mb-8 md:mb-0 md:pr-12 text-center md:text-left">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
+                        Bergabung dengan <span class="bg-gradient-to-r from-revorz-300 to-revorz-500 bg-clip-text text-transparent">Revolusi.</span>
+                    </h3>
+                    <p class="text-neutral-400 text-sm md:text-base font-light leading-relaxed max-w-md mx-auto md:mx-0">
+                        Dapatkan akses eksklusif ke rilis produk terbaru, penawaran khusus, dan wawasan gaya hidup cerdas langsung di kotak masuk Anda.
+                    </p>
                 </div>
-                <p class="text-neutral-600 text-xs tracking-widest uppercase">
-                    &copy; 2026 Revorz. Hak Cipta Dilindungi.
-                </p>
+                <div class="w-full md:w-[400px]">
+                    <form class="relative group" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Alamat Email Anda" class="w-full bg-black/50 border border-white/10 rounded-full px-6 py-4 pr-16 text-white placeholder-neutral-500 text-sm focus:outline-none focus:border-revorz-500/50 transition-all duration-300">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-revorz-500 text-white flex items-center justify-center hover:bg-revorz-400 hover:scale-105 transition-all duration-300 shadow-[0_0_15px_rgba(59,155,229,0.4)] cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Main Footer Links Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-20">
+                
+                <!-- Brand Column -->
+                <div class="md:col-span-12 lg:col-span-5 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <img src="./asset/logo-asset.png" alt="RevORz Logo" class="h-10 w-auto opacity-90 drop-shadow-lg mb-8 hover:scale-105 transition-transform duration-500">
+                    <p class="text-neutral-400 text-sm md:text-base font-light leading-relaxed max-w-sm mb-8">
+                        Kami tidak sekadar menciptakan jam tangan; kami mendefinisikan ulang cara Anda berinteraksi dengan waktu melalui presisi teknologi tinggi dan keindahan desain tanpa kompromi.
+                    </p>
+                    <div class="flex items-center gap-3 bg-white/5 border border-white/10 rounded-full px-5 py-2.5">
+                        <span class="relative flex h-2.5 w-2.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        <span class="text-xs text-neutral-300 tracking-wider font-medium uppercase">Sistem Global Online</span>
+                    </div>
+                </div>
+
+                <!-- Links Columns -->
+                <div class="md:col-span-12 lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <!-- Produk -->
+                    <div class="flex flex-col gap-6">
+                        <h4 class="text-white text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center lg:justify-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-revorz-500"></span> Produk
+                        </h4>
+                        <div class="flex flex-col items-center lg:items-start gap-4">
+                            <a href="#produk" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Elite Series
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Aksesoris
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Watch Faces
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Perusahaan -->
+                    <div class="flex flex-col gap-6">
+                        <h4 class="text-white text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center lg:justify-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-revorz-500"></span> Perusahaan
+                        </h4>
+                        <div class="flex flex-col items-center lg:items-start gap-4">
+                            <a href="#home" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Tentang Kami
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#fitur" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Visi & Inovasi
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Karir
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dukungan -->
+                    <div class="flex flex-col gap-6">
+                        <h4 class="text-white text-xs font-bold tracking-[0.2em] uppercase flex items-center justify-center lg:justify-start gap-2">
+                            <span class="w-2 h-2 rounded-full bg-revorz-500"></span> Dukungan
+                        </h4>
+                        <div class="flex flex-col items-center lg:items-start gap-4">
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Pusat Bantuan
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Cek Garansi
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#" class="text-neutral-400 hover:text-white text-sm font-light transition-colors duration-300 relative group w-fit">
+                                Hubungi Kami
+                                <span class="absolute -bottom-1 left-0 w-0 h-px bg-revorz-500 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider line -->
+            <div class="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
+
+            <!-- Bottom Bar -->
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                <!-- Copyright & Legals -->
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
+                    <p class="text-neutral-500 text-xs tracking-widest uppercase font-medium">
+                        &copy; 2026 RevORz. Hak Cipta Dilindungi.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-4 md:gap-6">
+                        <a href="#" class="text-neutral-500 hover:text-white text-xs uppercase tracking-wider transition-colors duration-300">Privacy Policy</a>
+                        <span class="w-1 h-1 rounded-full bg-neutral-700 hidden md:block"></span>
+                        <a href="#" class="text-neutral-500 hover:text-white text-xs uppercase tracking-wider transition-colors duration-300">Terms of Service</a>
+                    </div>
+                </div>
+
+                <!-- Social Media & Scroll Top -->
                 <div class="flex items-center gap-6">
-                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="Instagram">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="Twitter / X">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-neutral-600 hover:text-revorz-400 transition-colors duration-300 cursor-pointer" aria-label="YouTube">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                        </svg>
+                    <div class="flex items-center gap-3 border-r border-white/10 pr-6">
+                        <a href="https://www.instagram.com/revorz.id?igsh=Y28ybHozcGx6cHZ5" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-revorz-500 transition-all duration-300 shadow-[0_0_0_rgba(59,155,229,0)] hover:shadow-[0_0_15px_rgba(59,155,229,0.4)] cursor-pointer" aria-label="Instagram">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-revorz-500 transition-all duration-300 shadow-[0_0_0_rgba(59,155,229,0)] hover:shadow-[0_0_15px_rgba(59,155,229,0.4)] cursor-pointer" aria-label="TikTok">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <a href="#home" class="group flex items-center gap-2 text-neutral-500 hover:text-white transition-colors duration-300 uppercase tracking-widest text-[10px] font-bold">
+                        <span class="hidden sm:inline">Kembali ke Atas</span>
+                        <div class="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-revorz-500 group-hover:border-revorz-500 transition-all duration-300 shadow-[0_0_15px_rgba(59,155,229,0)] group-hover:shadow-[0_0_15px_rgba(59,155,229,0.4)]">
+                            <svg class="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        </div>
                     </a>
                 </div>
             </div>
@@ -851,7 +1039,7 @@
                             <p class="text-revorz-400 text-[9px] md:text-[10px] tracking-mega-wide uppercase font-bold mb-2 flex items-center gap-2">
                                 <span class="w-4 h-[1px] bg-revorz-500"></span> Model: Series 1
                             </p>
-                            <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">RevORz <span class="bg-gradient-to-r from-revorz-300 to-revorz-600 bg-clip-text text-transparent">Elite</span></h2>
+                            <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">Revorz <span class="bg-gradient-to-r from-revorz-300 to-revorz-600 bg-clip-text text-transparent">Elite</span></h2>
                             <div class="flex items-center gap-4">
                                 <span class="text-2xl md:text-3xl font-bold text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">Rp 90.000</span>
                                 <span class="text-sm text-neutral-500 line-through font-light decoration-red-500/50">Rp 99.000</span>
@@ -1259,25 +1447,25 @@
         function confirmOrder() {
             const loggedIn = localStorage.getItem('revorz_logged_in');
             if (!loggedIn) {
-                showToast("Silakan login terlebih dahulu untuk memesan.", false);
+                showToast("Silakan login terlebih dahulu untuk melanjutkan.", false);
                 setTimeout(() => {
                     closeProductModal();
                     setTimeout(() => openAuthModal('login'), 600);
                 }, 1000);
                 return;
             }
-            
-            const btn = event.target;
-            const originalText = btn.innerText;
-            btn.innerText = 'Menambahkan ke Keranjang...';
+
+            const btn = document.querySelector('#product-modal button[onclick="confirmOrder()"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="relative z-10 flex items-center justify-center gap-2">Mengalihkan...</span><div class="absolute inset-0 bg-gradient-to-r from-revorz-400 to-revorz-500"></div>';
             btn.disabled = true;
             
             setTimeout(() => {
-                showToast(`Pesanan ${colorTitles[document.getElementById('selected-color-name').innerText.toLowerCase().split(' ')[1]] || 'Elite'} berhasil ditambahkan!`);
-                btn.innerText = originalText;
+                window.open('https://www.instagram.com/revorz.id?igsh=Y28ybHozcGx6cHZ5', '_blank');
+                btn.innerHTML = originalHTML;
                 btn.disabled = false;
-                setTimeout(closeProductModal, 1500);
-            }, 2000);
+                closeProductModal();
+            }, 800);
         }
 
         // ===== INTERSECTION OBSERVER — SCROLL REVEAL =====
